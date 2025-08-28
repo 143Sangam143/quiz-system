@@ -9,46 +9,60 @@ Since, I don't have much time and can't do testing. I would need to go with all 
 ## Time Allocated
 
 I only have 12 hours to complete the task.
+<br />
 Started at : 08:50 pm
+<br />
 Need to finish at : 8:50 am
+<br />
 (I will be working whole night. I also haven't have much sleep previous night. So, let's hope I don't fall asleep midnight)
 
 ## Task Requirement
 
-• Allow admin users to create categories and difficulty levels
-• Allow admin users to create quizzes with questions and multiple answers
-• Allow users to register, log in, and take quizzes
-• Display results and quiz history
-• Randomly select 5 questions based on chosen category and difficulty so the admin does not know
-the specific questions shown to the user
+<ul>
+    <li>Allow admin users to create categories and difficulty levels</li>
+    <li>Allow admin users to create quizzes with questions and multiple answers</li>
+    <li>Allow users to register, log in, and take quizzes</li>
+    <li>Display results and quiz history</li>
+    <li>Randomly select 5 questions based on chosen category and difficulty so the admin does not know
+    the specific questions shown to the user</li>
+</ul>
 
 ## Functional Requirements
 
 ### 1. Authentication
 
-• Register/Login system
-• Two roles: admin , user
-• API authentication via Laravel Sanctum
+<ul>
+    <li>Register/Login system</li>
+    <li>Two roles: admin , user</li>
+    <li>API authentication via Laravel Sanctum</li>
+</ul>
 
 ### 2. Admin Features
 
-• Create, update, delete categories (e.g., PHP, JavaScript)
-• Create, update, delete difficulty levels (e.g., Beginner, Intermediate)
-• Create quizzes:
-• Title
-• Category (from categories table)
-• Difficulty level (from difficulty_levels table)
-• Time limit (minutes)
-• Add multiple questions per quiz
-• Add multiple answers per question (one marked as correct)
-• View quiz attempts by users
+<ul>
+    <li>Create, update, delete categories (e.g., PHP, JavaScript)</li>
+    <li>Create, update, delete difficulty levels (e.g., Beginner, Intermediate)</li>
+    <li>Create quizzes:
+        <ul>
+            <li>Title</li>
+            <li>Category (from categories table)</li>
+            <li>Difficulty level (from difficulty_levels table)</li>
+            <li>Time limit (minutes)</li>
+            <li>Add multiple questions per quiz</li>
+            <li>Add multiple answers per question (one marked as correct)</li>
+        </ul>
+    </li>
+    <li>View quiz attempts by users</li>
+</ul>
 
 ### 3. User Features
 
-• Submit selected answers for each question
-• View quiz result immediately after submission
-• Quiz scoring: user gets 1 point for each correct answer (e.g., 3 correct answers = 3 points)
-• View quiz history
+<ul>
+    <li>Submit selected answers for each question</li>
+    <li>View quiz result immediately after submission</li>
+    <li>Quiz scoring: user gets 1 point for each correct answer (e.g., 3 correct answers = 3 points)</li>
+    <li>View quiz history</li>
+</ul>
 
 ## My Plans
 
