@@ -2,7 +2,7 @@
 @section('page_sub_title')
     ~ Dashboard
 @endsection
-@section('content')
+@section('sub-content')
     <div class="cardBox">
         <h1>This is admin dashboard</h1>
     </div>
