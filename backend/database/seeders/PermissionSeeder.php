@@ -17,65 +17,113 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             [
-                "name" => "category_index",
+                "name" => "admins_index",
             ],
             [
-                "name" => "category_show",
+                "name" => "admins_show",
             ],
             [
-                "name" => "category_create",
+                "name" => "admins_create",
             ],
             [
-                "name" => "category_edit",
+                "name" => "admins_edit",
             ],
             [
-                "name" => "category_delete",
+                "name" => "admins_delete",
             ],
             [
-                "name" => "difficulty_index",
+                "name" => "roles_index",
             ],
             [
-                "name" => "difficulty_show",
+                "name" => "roles_show",
             ],
             [
-                "name" => "difficulty_create",
+                "name" => "roles_create",
             ],
             [
-                "name" => "difficulty_edit",
+                "name" => "roles_edit",
             ],
             [
-                "name" => "difficulty_delete",
+                "name" => "roles_delete",
             ],
             [
-                "name" => "question_index",
+                "name" => "permissions_index",
             ],
             [
-                "name" => "question_show",
+                "name" => "permissions_show",
             ],
             [
-                "name" => "question_create",
+                "name" => "permissions_create",
             ],
             [
-                "name" => "question_edit",
+                "name" => "permissions_edit",
             ],
             [
-                "name" => "question_delete",
+                "name" => "permissions_delete",
             ],
             [
-                "name" => "answer_index",
+                "name" => "categories_index",
             ],
             [
-                "name" => "answer_show",
+                "name" => "categories_show",
             ],
             [
-                "name" => "answer_create",
+                "name" => "categories_create",
             ],
             [
-                "name" => "answer_edit",
+                "name" => "categories_edit",
             ],
             [
-                "name" => "answer_delete",
+                "name" => "categories_delete",
             ],
+            [
+                "name" => "difficulties_index",
+            ],
+            [
+                "name" => "difficulties_show",
+            ],
+            [
+                "name" => "difficulties_create",
+            ],
+            [
+                "name" => "difficulties_edit",
+            ],
+            [
+                "name" => "difficulties_delete",
+            ],
+            [
+                "name" => "questions_index",
+            ],
+            [
+                "name" => "questions_show",
+            ],
+            [
+                "name" => "questions_create",
+            ],
+            [
+                "name" => "questions_edit",
+            ],
+            [
+                "name" => "questions_delete",
+            ],
+            [
+                "name" => "answers_index",
+            ],
+            [
+                "name" => "answers_show",
+            ],
+            [
+                "name" => "answers_create",
+            ],
+            [
+                "name" => "answers_edit",
+            ],
+            [
+                "name" => "answers_delete",
+            ],
+            [
+                "name" => "roles_and_permissions",
+            ]
         ];
         foreach ($permissions as &$permission) {
             $permission['guard_name'] = 'admin';

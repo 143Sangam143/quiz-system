@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Base\AnswerController;
+use App\Http\Controllers\Base\CategoryController;
+use App\Http\Controllers\Base\DifficultyController;
+use App\Http\Controllers\Base\PermissionController;
+use App\Http\Controllers\Base\QuestionController;
+use App\Http\Controllers\Base\RoleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Frontend\FrontpageController;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +40,13 @@ Route::get('/', [FrontpageController::class,'index'])->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
+    Route::resource('manage-admins', AdminController::class);
+
+    Route::resource('manage-categories', CategoryController::class);
+    Route::resource('manage-difficulties', DifficultyController::class);
+    Route::resource('manage-questions', QuestionController::class);
+    Route::resource('manage-answers', AnswerController::class);
+
 });

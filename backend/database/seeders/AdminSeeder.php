@@ -28,6 +28,7 @@ class AdminSeeder extends Seeder
             'updated_at' => $now,
             'parent_id' => 0,
         ]);
+        $ultraAdmin->assignRole('ultra_admin');
 
         $admins = [
             [
