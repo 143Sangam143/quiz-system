@@ -14,7 +14,7 @@ class Admin
 
         $user = Auth::guard('admin')->user();
         
-        if ($user && $user->can('has_backend')) {
+        if ($user) {
             return $next($request);
         }
         

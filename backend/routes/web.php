@@ -1,6 +1,36 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Frontend\FrontpageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DashboardController::class,'index'])->name('home');
+
+/*************************************************************************************************************/
+/****************************************** Normal Routes ****************************************************/
+/*************************************************************************************************************/
+Route::get('/register', [RegisterController:: class,'create'])->name('register.create')->middleware('guest');
+Route::post('/register/update', [RegisterController:: class,'store'])->name('register.store')->middleware('guest');
+
+Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/authenticate', [LoginController::class,'authenticate'])->name('authenticate')->middleware('guest');
+
+Route::get('/admins', [LoginController::class, 'admin_login'])->name('admin.login')->middleware('guest');
+Route::post('/admin/authenticate', [LoginController::class,'admin_authenticate'])->name('admin.authenticate')->middleware('guest');
+
+Route::get('/logout', [LoginController::class,'logout'])->name('logout');
+Route::get('/userfront', [DashboardController::class,'userfront'])->name('userfront');
+
+/*************************************************************************************************************/
+/***************************************** Frontend Routes ***************************************************/
+/*************************************************************************************************************/
+Route::get('/', [FrontpageController::class,'index'])->name('home');
+
+/*************************************************************************************************************/
+/****************************************** Backend Routes ***************************************************/
+/*************************************************************************************************************/
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+});
