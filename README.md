@@ -1,79 +1,153 @@
-# Sangam Quiz System
+# Basic Quiz System
 
-## About the project
+## About Project
 
-This project is being made for "Infotech Services" recuritment task. The Task is to make a quiz system where the backend is in laravel and frontend is in react. Well this will be the first time I will be doing both by myself from scratch. I did have done react and laravel combination but in react only the api consumption. Well I do have experience in Nextjs on both frontend and backend.
+This is a recuritment task project of Infotech Service. It uses react as a frontend, laravel as backend. Tailwind is integrated but since, the new update the tailwind is not working right now. For the api authethication sancturm is used. The main routes for this task are in api.php, and the routes in web.php are irrelevant to the tasks. 
 
-Since, I don't have much time and can't do testing. I would need to go with all things working fine and testing at the end. So, this project will not be a simple react frontend and laravel backend. It will be both (react frontend and laravel backend) and also traditional laravel i.e blade engine for frontend too. I would be going with blade engine first cause I am more familiar with it and would be able to develop a working project fast. Well, this traditional laravel will be more advance than the react and laravel combo, since my main background is full stack in laravel well abit skill on react and nextjs.
+The basic data are created using laravel seeder and factory.
 
-## Time Allocated
+## How to run the project
 
-I only have 12 hours to complete the task.
-<br />
-Started at : 08:50 pm
-<br />
-Need to finish at : 8:50 am
-<br />
-(I will be working whole night. I also haven't have much sleep previous night. So, let's hope I don't fall asleep midnight)
+### Step 1 : Clone the repo
+```
+git clone https://github.com/143Sangam143/quiz-system
+```
+### Step 2 : Laravel Setup
+Open terminal and navigate to backend
+```
+cd backend
+```
+Run below commands one at a time. Also, start your xampp and apaache server. Mysql too.
+```
+composer install
+cp .env.example .env //only if .evn file is not present
+php artisan key:generate
+npm install
+php artisan migrate --seed
+```
 
-## Task Requirement
+### Step 3 : Database Creation
 
-<ul>
-    <li>Allow admin users to create categories and difficulty levels</li>
-    <li>Allow admin users to create quizzes with questions and multiple answers</li>
-    <li>Allow users to register, log in, and take quizzes</li>
-    <li>Display results and quiz history</li>
-    <li>Randomly select 5 questions based on chosen category and difficulty so the admin does not know
-    the specific questions shown to the user</li>
-</ul>
+Create a dabase with name 'quiz_system' or make the own you like and update in .env variabel database name
 
-## Functional Requirements
+### Step 4 : Run the backend
+```
+php artisan serve
+```
+To run the view of backend you would need to do below but there is nothing much yet there. So you can skip it
+```
+npm run dev
+```
 
-### 1. Authentication
+### Step 5 : React Setup
 
-<ul>
-    <li>Register/Login system</li>
-    <li>Two roles: admin , user</li>
-    <li>API authentication via Laravel Sanctum</li>
-</ul>
+open new terminal and navigate to path frontend
+```
+cd frontend
+```
+then run the below commands
+```
+npm install
+npx start
+```
 
-### 2. Admin Features
+### Step 6 : Access point
+The port for laravel is 8000 and react is 3000 so make sure both of these port are free. Running this project in new port won't work, well it will if you update the cors, env and service.js of the react to work on the port you are used to.
 
-<ul>
-    <li>Create, update, delete categories (e.g., PHP, JavaScript)</li>
-    <li>Create, update, delete difficulty levels (e.g., Beginner, Intermediate)</li>
-    <li>Create quizzes:
-        <ul>
-            <li>Title</li>
-            <li>Category (from categories table)</li>
-            <li>Difficulty level (from difficulty_levels table)</li>
-            <li>Time limit (minutes)</li>
-            <li>Add multiple questions per quiz</li>
-            <li>Add multiple answers per question (one marked as correct)</li>
-        </ul>
-    </li>
-    <li>View quiz attempts by users</li>
-</ul>
+```
+localhost:3000
+```
 
-### 3. User Features
+## Log In Credentials
 
-<ul>
-    <li>Submit selected answers for each question</li>
-    <li>View quiz result immediately after submission</li>
-    <li>Quiz scoring: user gets 1 point for each correct answer (e.g., 3 correct answers = 3 points)</li>
-    <li>View quiz history</li>
-</ul>
+### For admin
+```
+    username => admin@gmail.com,
+    password => admin@admmin
+```
+### For user
+```
+    {
+        {
+            username => user@gmail.com
+            password => admin@admin
+        },
+        {
+            username => user2@gmail.com
+            password => admin@admin
+        },
+        {
+            username => user3@gmail.com
+            password => admin@admin
+        },
+    }
+```
 
-## My Plans
+## Notice
 
-Since I have been asked to give my 100% for this task which isn't possible with this little time. I might only be able to give 70 tp 80% of my best. I don't know if I would get selected so, I will be implementing something more here so that my time won't be wasted. I mean if I didn't get select I would turn this into a website in the future which I can add in the cv.
+Below from this point are only info dump and my own rambling. So It is not necessarily to go with below. Also, the ui is not great since tailwind is not working at all.  It will be fix later when I have time.
 
-### Somethings in my mind
+## How to navigate
 
-I alreayd have a few thing and more will be added later
+### First
+Go to localhost:3000 you will see the login button and register button. (if you are also seeing dashboard there then maybe I forgot to wrap it with user  session. )
 
-1. Make it into multi tenant which I did in my Personal CMS.
-2. Color picker for difficulty.
-3. Permisison every where like in my personal CMS.
+### Second
+You can register your own account and go through the project. (This project is not upto standard, so hope you would understand. I might need 6 days and AI's to make it to look a bit better and some standard.)
 
-(All these ideas are for laravel blade. And if I have time I would implement it on react too.)
+If you want to go with already existing user accounts then here we go.
+
+#### Go from admin it will be helpful
+```
+    username => admin@gmail.com,
+    password => admin@admmin
+```
+
+##### There are menus and from these menu you will be able to perform these actions
+1. Category => to list, create, edit, delete category
+2. Difficulty => to list, create, edit, delete difficulty
+3. Question  => to list , create, edit, delete question
+            => from same you create aswers and the correct answer, answer ecplnation
+4. Quiz => to list, create, delete quiz 
+        => you will also see the number of player who attempt, total scores
+
+(
+    Note:: Quiz edit doesn't work yet. So skip it. And in quiz I seem to have misunderstood something. In the admin feature, there was a point which ask a quiz should have multiple questions but in the project overiew there was this which I saw later "Randomly select 5 questions based on chosen category and difficulty so the admin does not know
+    the specific questions shown to the user". Because I confused, I tried making the quiz creation complicated due to which making the question fetch and selection on initial load on edit became hard. After 3 hours and even using AI, I skipped it, If I got additinal time then I would correct the misunderstand ( I might turn it too a feature too comboo of both)
+)
+
+I guess this is it in admin.
+
+#### For the users or the players
+```
+    {
+        {
+            username => user@gmail.com
+            password => admin@admin
+        },
+        {
+            username => user2@gmail.com
+            password => admin@admin
+        },
+        {
+            username => user3@gmail.com
+            password => admin@admin
+        },
+    }
+```
+
+### Menus avaiable to user
+1. Quizzes List => See the list of quizzes available and there is play button from which you can play
+2. History => See what quiz you played previously and your scores
+
+
+## To the person who is reviewing this
+
+### Things left to do
+1. Make tailwind 4 work in the react
+2. Refactor the whole react code into hooks and utils and what is needed to make the code look clean
+3. Make everything into component (this tasks will only be done in the last)
+4. Bug testing in detail (For now, I have only covered the cases that comes to my mind)
+5. Make toaster notification work to see the response (this is also not working)
+
+Note: My mistake I was in hurry so, without looking up much I started setup but both got setup in latest version i.e laravel and react. When I realize my mistake it was late. Even tailwind setup is totally messed up. I didn't have much time So, I had to go with. 

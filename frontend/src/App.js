@@ -26,6 +26,11 @@ import QuizIndex from "./pages/quizzes/index";
 import QuizCreate from './pages/quizzes/create';
 import QuizEdit from './pages/quizzes/edit';
 
+import QuizListUser from "./pages/user-quizzes/index";
+import QuizPlayer from "./pages/user-quizzes/player";
+import History from './pages/user-quizzes/history';
+import Register from './pages/Register';
+
 function App() {
   return (
     <AuthProvider>
@@ -46,32 +51,60 @@ function App() {
               <Home />
             } />
             <Route path="/login" element={
-              <Login switchToRegister={() => {}} />
+              <Login />
+            } />
+            <Route path="/register" element={
+              <Register />
             } />
 
             <Route path="/dashboard" element={
-              <PrivateRoute>
+              <PrivateRoute allowedRoles={['user','admin']}>
                 <Layout>
                 </Layout>
               </PrivateRoute>
             } />
+            {/************************ User Route Starts ****************************/}
+              <Route path="/quiz-list" element={
+                <PrivateRoute allowedRoles={['user']}>
+                  <Layout>
+                    <QuizListUser />
+                  </Layout>
+                </PrivateRoute>
+              } />
+              <Route path="/quiz-play/:uri" element={
+                <PrivateRoute allowedRoles={['user']}>
+                  <Layout>
+                    <QuizPlayer />
+                  </Layout>
+                </PrivateRoute>
+              } />
+              <Route path="/history/:id" element={
+                <PrivateRoute allowedRoles={['user']}>
+                  <Layout>
+                    <History />
+                  </Layout>
+                </PrivateRoute>
+              } />
+            {/************************ User Route Ends ****************************/}
+
+            {/******************* Mostly Admin Specific Route ****************************/}
             {/****************************** Categories Routes Starts *******************/}
               <Route path="/categories" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <CategoryIndex />
                   </Layout>
                 </PrivateRoute>
               } />
               <Route path="/categories/create" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <CategoryCreate />
                   </Layout>
                 </PrivateRoute>
               } />
               <Route path="/categories/edit/:uri" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <CategoryEdit />
                   </Layout>
@@ -80,21 +113,21 @@ function App() {
             {/****************************** Categories Routes Ends *******************/}
             {/****************************** Difficulties Routes Starts *******************/}
               <Route path="/difficulties" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <DifficultyIndex />
                   </Layout>
                 </PrivateRoute>
               } />
               <Route path="/difficulties/create" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <DifficultyCreate />
                   </Layout>
                 </PrivateRoute>
               } />
               <Route path="/difficulties/edit/:uri" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <DifficultyEdit />
                   </Layout>
@@ -103,21 +136,21 @@ function App() {
             {/****************************** Difficulties Routes Ends *******************/}
             {/****************************** Questions Routes Starts *******************/}
               <Route path="/questions" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <QuestionIndex />
                   </Layout>
                 </PrivateRoute>
               } />
               <Route path="/questions/create" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <QuestionCreate />
                   </Layout>
                 </PrivateRoute>
               } />
               <Route path="/questions/edit/:uri" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <QuestionEdit />
                   </Layout>
@@ -126,7 +159,7 @@ function App() {
             {/****************************** Questions Routes Ends *******************/}
             {/****************************** Answers Routes Starts *******************/}
               <Route path="/answers/:uri" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <AnswerIndex />
                   </Layout>
@@ -135,21 +168,21 @@ function App() {
             {/****************************** answers Routes Ends *******************/}
             {/****************************** Quizzes Routes Starts *******************/}
               <Route path="/quizzes" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <QuizIndex />
                   </Layout>
                 </PrivateRoute>
               } />
               <Route path="/quizzes/create" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <QuizCreate />
                   </Layout>
                 </PrivateRoute>
               } />
               <Route path="/quizzes/edit/:uri" element={
-                <PrivateRoute>
+                <PrivateRoute allowedRoles={['admin']}>
                   <Layout>
                     <QuizEdit />
                   </Layout>

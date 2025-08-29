@@ -47,6 +47,7 @@ const apiService = {
             const res = await authApi.post("/login", credentials);
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
+            localStorage.setItem("role", res.data.role);
             return res.data;
         } catch (error) {
             throw error.response?.data || error;
@@ -58,6 +59,7 @@ const apiService = {
             const res = await authApi.post("/register", data);
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
+            localStorage.setItem("role", res.data.role);
             return res.data;
         } catch (error) {
             throw error.response?.data || error;
@@ -209,9 +211,27 @@ const apiService = {
     async getQuestionByCategoryDifficulty(data){
         const  response = await api.post('/questions/filter',data);
         return response.data;
-    }
+    },
 
+    async getQuizDataByUri(uri) {
+        const response = await api.get(`/quiz-data/${uri}`);
+        return response.data;
+    },
+
+    async getQuizQuestionByUri(uri){
+        const response = await api.get(`/quiz-questions/${uri}` );
+        return response.data
+    },
+
+    async saveQuizAttempt(data){
+        const response = await api.post('/save-quiz-attempt',data);
+        return response.data;
+    },
     /****************************Quizzes Services Ends ************************/
+    async getUserHistory(id){
+        const response = await api.get(`/result-history/${id}`);
+        return response.data;
+    }
 };
 
 export default apiService;

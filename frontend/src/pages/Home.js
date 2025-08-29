@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Home() {
-    const { user, logout } = useAuth();
+    const { user, role, logout } = useAuth();
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
@@ -14,13 +14,24 @@ export default function Home() {
 
                 <div className="flex space-x-4">
 
-
-                    <Link
-                        to="/dashboard"
-                        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-                    >
-                        Dashboard
-                    </Link>
+                    {
+                        role == 'admin' ? (
+                            <Link
+                                to="/admin-dashboard"
+                                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
+                            >
+                                Dashboard 
+                            </Link>
+                        ) : (
+                            <Link
+                                to="/dashboard"
+                                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
+                            >
+                                Dashboard 
+                            </Link>
+                        )
+                    }
+                    
 
                     {user ? (
                             <button
@@ -30,12 +41,20 @@ export default function Home() {
                                 Logout
                             </button>
                         ) : (
-                            <Link
-                                to={'/login'}
-                                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-                            >
-                                Login
-                            </Link>
+                            <>
+                                <Link
+                                    to={'/login'}
+                                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    to={'/register'}
+                                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                                >
+                                    Register
+                                </Link>
+                            </>
                         )
                     }
                 </div>

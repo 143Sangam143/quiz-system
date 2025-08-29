@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Base;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Difficulty;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\QuizAttempt;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,11 +61,11 @@ class QuizController extends Controller
                 'title' => 'required|string|max:255|unique:quizzes,title',
                 'time' => 'required|integer|min:1',
                 'is_active' => 'required|boolean',
-                'category_ids' => 'required|array|min:1',
-                'category_ids.*' => 'exists:categories,id',
+                'category_id' => 'required|array|min:1',
+                'category_id.*' => 'exists:categories,id',
                 'difficulty_id' => 'required|exists:difficulties,id',
-                'question_ids' => 'required|array|min:1',
-                'question_ids.*' => 'exists:questions,id',
+                'question_id' => 'required|array|min:1',
+                'question_id.*' => 'exists:questions,id',
             ]);
 
             $data = $request->all();
@@ -73,8 +75,8 @@ class QuizController extends Controller
             $quiz = Quiz::create($data);
 
             // Attach categories & questions
-            $quiz->categories()->sync($request->category_ids);
-            $quiz->questions()->sync($request->question_ids);
+            $quiz->categories()->sync($request->category_id);
+            $quiz->questions()->sync($request->question_id);
 
             return response()->json([
                 'success' => true,
@@ -124,17 +126,21 @@ class QuizController extends Controller
     public function edit(Quiz $quiz)
     {
         try {
+            Log::error($quiz);
             $quiz->load('categories','difficulty','questions');
             $categories = Category::active()->get();
             $difficulties = Difficulty::active()->get();
-
+            $questions = Question::whereIn('category_id', $quiz->category_ids)
+                                ->where('difficulty_id', $quiz->difficulty_id)
+                                ->get();
             return response()->json([
                 'success' => true,
                 'message' => 'Quiz fetched successfully for editing',
                 'data' => [
                     'quiz' => $quiz,
                     'categories' => $categories,
-                    'difficulties' => $difficulties
+                    'difficulties' => $difficulties,
+                    'questions' => $questions
                 ]
             ]);
         } catch (Exception $e) {
@@ -199,8 +205,10 @@ class QuizController extends Controller
     public function destroy(Quiz $quiz)
     {
         try {
-            $quiz->categories()->detach();
+            $quiz->categories()?->detach();
             $quiz->questions()->detach();
+            $quiz->attempts()->delete();
+
             $quiz->delete();
 
             return response()->json([
@@ -243,6 +251,84 @@ class QuizController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to update quiz',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getQuizData(Quiz $quiz){
+        try{
+            return response()->json([
+                'success' => true,
+                'data' => $quiz
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch quiz question',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function getQuestions(Quiz $quiz){
+        try{
+            $questions = $quiz->questions()?->active()->with('answers')->paginate(5);
+            return response()->json([
+                'success' => true,
+                'data' => $questions
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch quiz question',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function quizSave(Request $request){
+        try{
+            $quizId = $request->quizId;
+            $score = $request->score;
+            $userId = $request->userId;
+            $started_at = $request->started_at;
+            $completed_at = $request->completed_at;
+            QuizAttempt::create([
+                'quiz_id' => $quizId,
+                'user_id' => $userId,
+                'score' => $score,
+                'started_at' => $started_at,
+                'finished_at' => $completed_at
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Quiz result saved successfully',
+            ]);
+        }catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to save quiz result',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getResultHistory($id){
+        try{
+            $user =   Admin::findOrFail($id);
+            $attempts = QuizAttempt::where('user_id',$user->id)->with('quiz')->get();
+            return response()->json([
+                'success' => true,
+                'message' => 'Result fetch successfully',
+                'attempts' => $attempts
+            ]);
+
+        }catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to save quiz result',
                 'error' => $e->getMessage()
             ], 500);
         }

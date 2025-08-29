@@ -27,6 +27,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('quizzes', QuizController::class);
 
     Route::post('/questions/filter',[QuizController::class,"filterQuestion"]);
+    Route::get('/quiz-data/{quiz}', [QuizController::class, "getQuizData"]);
+    Route::get('/quiz-questions/{quiz}', [QuizController::class, "getQuestions"]);
+    Route::post('/save-quiz-attempt', [QuizController::class,'quizSave']);
 
+    Route:: get('/result-history/{id}',[QuizController::class,'getResultHistory']);
 
 });

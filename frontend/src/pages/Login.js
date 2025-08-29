@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import {toast} from 'react-toastify';
 import { useNavigate } from 'react-router-dom'; 
 
-export default function Login({onToggle}) {
+export default function Login() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -82,16 +82,6 @@ export default function Login({onToggle}) {
                             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
                         >
                             {loading ? 'Signing in...' : 'Sign in'}
-                        </button>
-                    </div>
-
-                    <div className="text-center">
-                        <button
-                            type="button"
-                            onClick={onToggle}
-                            className="text-indigo-600 hover:text-indigo-500"
-                        >
-                            Don't have an account? Register
                         </button>
                     </div>
                 </form>
