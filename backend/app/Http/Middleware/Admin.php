@@ -13,7 +13,6 @@ class Admin
     {
 
         $user = Auth::guard('admin')->user();
-        
         if ($user) {
             return $next($request);
         }

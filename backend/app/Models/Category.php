@@ -11,4 +11,21 @@ class Category extends Model
     protected $guard_name = 'admin';
 
     protected $fillable = ['name','admin_id','uri','is_active'];
+
+    public function scopeActive($query){
+        return $query->where('is_active', '1');
+    }
+
+    public function getRouteKeyName(){
+        return 'uri';
+    }
+
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
+
+    public function quizzes()
+    {
+        return $this->belongsToMany(Quiz::class, 'quiz_categories');
+    }
 }
