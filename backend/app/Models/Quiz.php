@@ -45,4 +45,8 @@ class Quiz extends Model
     {
         return $this->belongsToMany(Question::class, 'quizzes_questions');
     }
+
+    public function getRouteKeyName(){
+        return 'uri';
+    }
 }

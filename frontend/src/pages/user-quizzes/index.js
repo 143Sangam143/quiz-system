@@ -4,7 +4,7 @@ import apiService from "../../api/service";
 import { toast } from 'react-toastify';
 
 
-export default function QuizIndex() {
+export default function QuizListUser() {
   const [quizzes, setQuizzes] = useState([]);
   const [loading, setLoading] = useState();
 
@@ -83,19 +83,7 @@ export default function QuizIndex() {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Active
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Total Players
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Total Attempts
+                  Number of Player who played
                 </th>
                 <th
                   scope="col"
@@ -104,7 +92,7 @@ export default function QuizIndex() {
                   Highest Score
                 </th>
                 <th scope="col" className="relative px-6 py-3">
-                  <span className="sr-only">Edit</span>
+                  <span className="sr-only">Play</span>
                 </th>
               </tr>
             </thead>
@@ -117,31 +105,19 @@ export default function QuizIndex() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {item.title}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <input type="checkbox" name="is_active" checked={item.is_active} />
-                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {item.total_players}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.total_attempts}
-                  </td>
                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.highest_score}
+                    {item.highest_score ?? 0}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link
-                      to={`/quizzes/edit/${item.uri}`}
+                      to={`/quiz-play/${item.uri}`}
                       className="text-indigo-600 hover:text-indigo-900"
                     >
-                      Edit
+                      Play
                     </Link>
-                    <button
-                      onClick={() => handleDelete(item)}
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Delete
-                    </button>
                   </td>
                 </tr>
               ))}
