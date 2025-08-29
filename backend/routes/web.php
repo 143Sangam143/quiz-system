@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Base\AnswerController;
 use App\Http\Controllers\Base\CategoryController;
 use App\Http\Controllers\Base\DifficultyController;
+use App\Http\Controllers\Base\GlobalController;
 use App\Http\Controllers\Base\PermissionController;
 use App\Http\Controllers\Base\QuestionController;
 use App\Http\Controllers\Base\RoleController;
@@ -48,5 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin']], fun
     Route::resource('manage-difficulties', DifficultyController::class);
     Route::resource('manage-questions', QuestionController::class);
     Route::resource('manage-answers', AnswerController::class);
+
+     Route::post('status/update/{id}', [GlobalController::class, 'statusUpdate'])->name('status.update');
 
 });

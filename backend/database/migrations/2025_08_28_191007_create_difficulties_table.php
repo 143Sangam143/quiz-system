@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('admin_id')->nullable()->constrained('admins')->nullOnDelete();
             $table->string('name')->unique();
+            $table->string('uri')->unique();
             $table->boolean('is_active')->default(1);
             $table->timestamps();
         });

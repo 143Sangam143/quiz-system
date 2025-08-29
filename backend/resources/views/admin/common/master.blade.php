@@ -12,6 +12,7 @@
 @endsection
 @section('content')
     @include('admin.common.full_panel')
+    @include('admin.common.common_js')
 @endsection
 @section('foot-script')
     <script src="{{ asset('admin/js/main.js') }}"></script>

@@ -17,6 +17,7 @@ class DifficultySeeder extends Seeder
             [
                 'admin_id' => 3,
                 'name' => 'Beginner',
+                'uri' => 'beginner',
                 'is_active' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -24,6 +25,7 @@ class DifficultySeeder extends Seeder
             [
                 'admin_id' => 3,
                 'name' => 'Intermediate',
+                'uri' => 'intermediate',
                 'is_active' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -31,6 +33,7 @@ class DifficultySeeder extends Seeder
             [
                 'admin_id' => 3,
                 'name' => 'Advanced',
+                'uri' => 'advanced',
                 'is_active' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -38,6 +41,7 @@ class DifficultySeeder extends Seeder
             [
                 'admin_id' => 3,
                 'name' => 'Expert',
+                'uri' => 'expert',
                 'is_active' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),

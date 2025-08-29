@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Base;
 
 use App\Http\Controllers\Controller;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -10,9 +11,16 @@ class AnswerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($uri)
     {
-        //
+        $question = Question::where('uri',$uri)->first();
+        $data = $question->answers;
+        return response()->json([
+            'success' => true,
+            'message' => 'Answers fetch successfully',
+            'data' => $data
+
+        ]);
     }
 
     /**

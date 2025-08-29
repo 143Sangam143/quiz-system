@@ -11,5 +11,9 @@ class Answer extends Model
     use HasFactory;
     protected $guard_name = 'admin';
 
-    protected $fillable = ['admin_id','question_id','answer_text','is_active'];
+    protected $fillable = ['admin_id','question_id','answer_text','is_correct'];
+
+    protected $casts = [
+        'is_correct' => 'boolean',
+    ];
 }

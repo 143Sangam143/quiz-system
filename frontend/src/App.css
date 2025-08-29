@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/* Only for radio buttons */
+input[type="radio"] {
+  accent-color: #2563eb; /* blue dot when selected */
+  cursor: pointer;
+}

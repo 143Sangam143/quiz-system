@@ -14,14 +14,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->api(prepend: [
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-        ]);
+        // $middleware->api([
+        //     \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class . ':except:api/login,api/register',
+        // ]);
         $middleware->alias([
             'admin' => Admin::class,
             'guest'=> RedirectIfAuthenticated::class,
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
-        $middleware->throttleApi();
+        // $middleware->throttleApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

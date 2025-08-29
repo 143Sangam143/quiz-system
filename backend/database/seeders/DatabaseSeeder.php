@@ -26,8 +26,14 @@ class DatabaseSeeder extends Seeder
 
         Category::factory(4)->create();
         $this->call(DifficultySeeder::class);
-        Question::factory(4)->create()->each(function ($question) {
+        Question::factory(16)->create()->each(function ($question) {
             Answer::factory(4)->create(['question_id' => $question->id]);
         });
+
+        $this->call(QuizSeeder::class);
+        $this->call(QuizCategorySeeder::class);
+        $this->call(QuizQuestionSeeder::class);
+        $this->call(QuizAttemptSeeder::class);
+
     }
 }
