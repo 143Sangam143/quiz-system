@@ -7,8 +7,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
-// import './App.css';
-
 import Login from "./pages/Login";
 import Home from './pages/Home';
 import Layout from "./components/Layout";
@@ -34,7 +32,7 @@ import Register from './pages/Register';
 function App() {
   return (
     <AuthProvider>
-      {/* <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -44,7 +42,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      > */}
+      />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={

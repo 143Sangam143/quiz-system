@@ -2,7 +2,7 @@
 
 ## About Project
 
-This is a recuritment task project of Infotech Service. It uses react as a frontend, laravel as backend. Tailwind is integrated but since, the new update the tailwind is not working right now. For the api authethication sancturm is used. The main routes for this task are in api.php, and the routes in web.php are irrelevant to the tasks. 
+This is a recuritment task project of Infotech Service. It uses react as a frontend, laravel as backend. Tailwindcss used for frontend. For the api authethication sanctum is used. The main routes for this task are in api.php, and the routes in web.php are irrelevant to the tasks. 
 
 The basic data are created using laravel seeder and factory.
 
@@ -19,9 +19,8 @@ cd backend
 ```
 Run below commands one at a time. Also, start your xampp and apaache server. Mysql too.
 ```
-composer install
 cp .env.example .env //only if .evn file is not present
-php artisan key:generate
+composer install
 npm install
 php artisan migrate --seed
 ```
@@ -48,7 +47,7 @@ cd frontend
 then run the below commands
 ```
 npm install
-npx start
+npm start
 ```
 
 ### Step 6 : Access point
@@ -90,10 +89,10 @@ Below from this point are only info dump and my own rambling. So It is not neces
 ## How to navigate
 
 ### First
-Go to localhost:3000 you will see the login button and register button. (if you are also seeing dashboard there then maybe I forgot to wrap it with user  session. )
+Go to localhost:3000 you will see the login button and register button.
 
 ### Second
-You can register your own account and go through the project. (This project is not upto standard, so hope you would understand. I might need 6 days and AI's to make it to look a bit better and some standard.)
+You can register your own account and go through the project.
 
 If you want to go with already existing user accounts then here we go.
 
@@ -113,7 +112,7 @@ If you want to go with already existing user accounts then here we go.
 
 (
     Note:: Quiz edit doesn't work yet. So skip it. And in quiz I seem to have misunderstood something. In the admin feature, there was a point which ask a quiz should have multiple questions but in the project overiew there was this which I saw later "Randomly select 5 questions based on chosen category and difficulty so the admin does not know
-    the specific questions shown to the user". Because I confused, I tried making the quiz creation complicated due to which making the question fetch and selection on initial load on edit became hard. After 3 hours and even using AI, I skipped it, If I got additinal time then I would correct the misunderstand ( I might turn it too a feature too comboo of both)
+    the specific questions shown to the user". Because I confused, I tried making the quiz creation complicated due to which making the question fetch and selection on initial load on edit became hard. After 3 hours and even using AI, I skipped it for now.
 )
 
 I guess this is it in admin.
@@ -144,10 +143,6 @@ I guess this is it in admin.
 ## To the person who is reviewing this
 
 ### Things left to do
-1. Make tailwind 4 work in the react
-2. Refactor the whole react code into hooks and utils and what is needed to make the code look clean
-3. Make everything into component (this tasks will only be done in the last)
-4. Bug testing in detail (For now, I have only covered the cases that comes to my mind)
-5. Make toaster notification work to see the response (this is also not working)
+1. Bug testing in detail (For now, I have only covered the cases that comes to my mind)
 
-Note: My mistake I was in hurry so, without looking up much I started setup but both got setup in latest version i.e laravel and react. When I realize my mistake it was late. Even tailwind setup is totally messed up. I didn't have much time So, I had to go with. 
+Note: My mistake I was in hurry so, without looking up much I started setup but both got setup in latest version i.e laravel and react. When I realize my mistake it was late. Even tailwind wasn't working. I didn't have much time So, I had to go with it. 
