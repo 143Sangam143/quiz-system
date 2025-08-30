@@ -1,79 +1,31 @@
-# Sangam Quiz System
+# Sangam Note
 
-## About the project
+## Things to implement
+1. Properly manage the toastr notification
+2. Make the status(is_active) to work from index page for all. And do using a generic function which will be used everywhere
+3. Upgrade the ui
+4. Make the landing page a bit better. Also fetch quiz and result before using logged in.
+5. Make the user password update, settings etc.
+6. Try to change the user from the admins table to the user in users table so that in the future multi-tenant won't be complex
+7. Research how the roles and permission can be implement through the react and apply it.
+8. Backend controller function response fix. Also apply the app()->isLocal() method to show the response required by the local and production field.
+9. Upgrade the controller so that both the api.php and web.php use same controller without disturbing the response required by the normal request, ajax and react request.
+10. Integrate the insights from here into the personal cms after completing the design upgrade of the personal cms backend (admin panel).
+11. In three months time build a portfolio website from the personal cms and make it work on blade engine and react both. To be exact it should be different website i.e one combo of react and laravel and another complete laravel. One backend to power two views.
 
-This project is being made for "Infotech Services" recuritment task. The Task is to make a quiz system where the backend is in laravel and frontend is in react. Well this will be the first time I will be doing both by myself from scratch. I did have done react and laravel combination but in react only the api consumption. Well I do have experience in Nextjs on both frontend and backend.
 
-Since, I don't have much time and can't do testing. I would need to go with all things working fine and testing at the end. So, this project will not be a simple react frontend and laravel backend. It will be both (react frontend and laravel backend) and also traditional laravel i.e blade engine for frontend too. I would be going with blade engine first cause I am more familiar with it and would be able to develop a working project fast. Well, this traditional laravel will be more advance than the react and laravel combo, since my main background is full stack in laravel well abit skill on react and nextjs.
+## Things Done in quiz system
+1. Basic quiz system made
+2. Tailwind downgraded to v3 to work
+3. Converted to hooks
+4. Auth using sanctum
 
-## Time Allocated
+## Improvement idea for quiz system
+1. Make a custom color pick of about 20 to 30 colors.
+2. Integrate the custom color picker functionality with difficulty so when creating the difficulty use can give the color as indicator and would helpful enough to assign different colors for different difficulty
+3. In Play zone, make it so that when user clicks wrong or right answer all wrong will be highlight and cross icon to show and for right one hightlight differently. (also reaseach about game engine maybe that will help to make this quiz system more advanced).
+4. Implement events where player can go on playing to infinity, i.e not stopping until wrong answer is submitted
+5. In quiz creation, mae the edit workable. Also, add a feature where the create can select the question for their quiz and selected question to be shown. And a feature where they can just click or check the random button which in the future when played the quiz automatically fetches the quesition from the cateogry and difficulty
+6. Improve the overall design and ui in something lookable
 
-I only have 12 hours to complete the task.
-<br />
-Started at : 08:50 pm
-<br />
-Need to finish at : 8:50 am
-<br />
-(I will be working whole night. I also haven't have much sleep previous night. So, let's hope I don't fall asleep midnight)
 
-## Task Requirement
-
-<ul>
-    <li>Allow admin users to create categories and difficulty levels</li>
-    <li>Allow admin users to create quizzes with questions and multiple answers</li>
-    <li>Allow users to register, log in, and take quizzes</li>
-    <li>Display results and quiz history</li>
-    <li>Randomly select 5 questions based on chosen category and difficulty so the admin does not know
-    the specific questions shown to the user</li>
-</ul>
-
-## Functional Requirements
-
-### 1. Authentication
-
-<ul>
-    <li>Register/Login system</li>
-    <li>Two roles: admin , user</li>
-    <li>API authentication via Laravel Sanctum</li>
-</ul>
-
-### 2. Admin Features
-
-<ul>
-    <li>Create, update, delete categories (e.g., PHP, JavaScript)</li>
-    <li>Create, update, delete difficulty levels (e.g., Beginner, Intermediate)</li>
-    <li>Create quizzes:
-        <ul>
-            <li>Title</li>
-            <li>Category (from categories table)</li>
-            <li>Difficulty level (from difficulty_levels table)</li>
-            <li>Time limit (minutes)</li>
-            <li>Add multiple questions per quiz</li>
-            <li>Add multiple answers per question (one marked as correct)</li>
-        </ul>
-    </li>
-    <li>View quiz attempts by users</li>
-</ul>
-
-### 3. User Features
-
-<ul>
-    <li>Submit selected answers for each question</li>
-    <li>View quiz result immediately after submission</li>
-    <li>Quiz scoring: user gets 1 point for each correct answer (e.g., 3 correct answers = 3 points)</li>
-    <li>View quiz history</li>
-</ul>
-
-## My Plans
-
-Since I have been asked to give my 100% for this task which isn't possible with this little time. I might only be able to give 70 tp 80% of my best. I don't know if I would get selected so, I will be implementing something more here so that my time won't be wasted. I mean if I didn't get select I would turn this into a website in the future which I can add in the cv.
-
-### Somethings in my mind
-
-I alreayd have a few thing and more will be added later
-
-1. Make it into multi tenant which I did in my Personal CMS.
-2. Color picker for difficulty.
-3. Permisison every where like in my personal CMS.
-
-(All these ideas are for laravel blade. And if I have time I would implement it on react too.)

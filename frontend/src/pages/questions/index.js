@@ -1,52 +1,17 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import apiService from "../../api/service";
-import { toast } from 'react-toastify';
-
+import { useListQuestion } from "../../lib/hooks/questions/use-list-question";
 
 export default function QuestionIndex() {
-  const [questions, setQuestion] = useState([]);
-  const [loading, setLoading] = useState();
-
-  const fetchQuestions = async() => {
-    try{
-      setLoading(true);
-      const res = await apiService.getQuestions();
-      setQuestion(res.data);
-    }catch (error) {
-      console.error("Error fetching questions:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-  useEffect(() => {
-    fetchQuestions();
-  },[]);
-
-  const handleDelete = async (item) => {
-    try{
-      setLoading(true);
-      const res = await apiService.deleteQuestion(item.uri);
-      if(res?.success){
-        toast.success('Question deleted successfully!');
-        fetchQuestions();
-      }else{
-        console.warn('Question not delete');
-      }
-    }catch (error) {
-      console.error("Error deleting question:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
+  const { questions, loading, handleDelete } = useListQuestion();
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
       <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">
-                    {'Question List'}
-                </h3>
-            </div>
+          <h3 className="text-lg font-semibold text-gray-900">
+              {'Question List'}
+          </h3>
+      </div>
       <div>
         <Link
           to="/questions/create"

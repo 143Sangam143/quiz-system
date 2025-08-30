@@ -1,44 +1,9 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import apiService from "../../api/service";
-import { toast } from 'react-toastify';
-
+import { useListQuiz } from "../../lib/hooks/quizzes/use-list-quiz";
 
 export default function QuizIndex() {
-  const [quizzes, setQuizzes] = useState([]);
-  const [loading, setLoading] = useState();
 
-  const fetchQuizzes = async() => {
-    try{
-      setLoading(true);
-      const res = await apiService.getQuizzes();
-      setQuizzes(res.data);
-    }catch (error) {
-      console.error("Error fetching quizzes:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-  useEffect(() => {
-    fetchQuizzes();
-  },[]);
-
-  const handleDelete = async (item) => {
-    try{
-      setLoading(true);
-      const res = await apiService.deleteQuiz(item.uri);
-      if(res?.success){
-        toast.success('Quize deleted successfully!');
-        fetchQuizzes();
-      }else{
-        console.warn('Quize not delete');
-      }
-    }catch (error) {
-      console.error("Error deleting quiz", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {quizzes, loading, handleDelete} = useListQuiz();
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
@@ -127,7 +92,7 @@ export default function QuizIndex() {
                     {item.total_attempts}
                   </td>
                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.highest_score}
+                    {item.highest_score ?? '-'}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link

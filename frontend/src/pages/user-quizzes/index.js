@@ -1,59 +1,16 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import apiService from "../../api/service";
-import { toast } from 'react-toastify';
-
+import { useQuizList } from "../../lib/hooks/user/use-quiz-list";
 
 export default function QuizListUser() {
-  const [quizzes, setQuizzes] = useState([]);
-  const [loading, setLoading] = useState();
-
-  const fetchQuizzes = async() => {
-    try{
-      setLoading(true);
-      const res = await apiService.getQuizzes();
-      setQuizzes(res.data);
-    }catch (error) {
-      console.error("Error fetching quizzes:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-  useEffect(() => {
-    fetchQuizzes();
-  },[]);
-
-  const handleDelete = async (item) => {
-    try{
-      setLoading(true);
-      const res = await apiService.deleteQuiz(item.uri);
-      if(res?.success){
-        toast.success('Quize deleted successfully!');
-        fetchQuizzes();
-      }else{
-        console.warn('Quize not delete');
-      }
-    }catch (error) {
-      console.error("Error deleting quiz", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
+  const { quizzes, loading } = useQuizList();
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
       <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">
-                    {'Quiz List'}
-                </h3>
-            </div>
-      <div>
-        <Link
-          to="/quizzes/create"
-          className="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-        >
-          Add
-        </Link>
+        <h3 className="text-lg font-semibold text-gray-900">
+          {'Quiz List'}
+        </h3>
       </div>
       {loading ? (
         <p className="text-gray-600">Loading data...</p>

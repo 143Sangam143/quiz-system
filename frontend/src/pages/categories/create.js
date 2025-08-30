@@ -1,41 +1,9 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import apiService from '../../api/service';
-import { useNavigate } from 'react-router-dom';
+import { useCreateCategory } from '../../lib/hooks/categories/use-create-category';
 
 export default function CategoryCreate() {
-    const [formData, setFormData] = useState({
-        name: '',
-        is_active: true
-    });
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            const res = await apiService.createCategory(formData);
-            if(res?.success){
-                navigate('/categories');
-                toast.success('Category created successfully!');
-            }else{
-                console.warn('Category not created');
-            }
-        } catch (error) {
-            const errorMessage = error.response?.data?.message || error.message || 'Something went wrong';
-            toast.error(errorMessage);
-        } finally {
-            setLoading(false);
-        }
-    };
-
+    
+    const {formData, loading, handleChange, handleSubmit} = useCreateCategory();
+    
     return (
         <div className="bg-white shadow-lg rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200">
