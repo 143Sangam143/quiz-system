@@ -3,10 +3,29 @@
 namespace App\Http\Controllers\Base;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 
 class GlobalController extends Controller
 {
+    public function updateStatus(Request $request){
+        try{
+            $data = $request->model::findOrFail($request->itemId);
+            $fieldName = $request->fieldName;
+            $data->$fieldName = $request->value;
+            $data->update();
+            return response()->json([
+                'success' => true,
+                'message' => nameDeformat($request->fieldName)." updated successfully",
+            ], 201);
+        }catch(Exception $e){
+            return response()->json([
+                'success' => false,
+                'message' => "Failed to update ".nameDeformat($request->fieldName)." ".$e->getMessage(),
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     /**
      * Display a listing of the resource.
      */

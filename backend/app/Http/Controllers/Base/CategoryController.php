@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::get();
+        $data = Category::with('questions')->latest()->get();
         return response()->json([
             'success' => true,
             'message' => 'Categories fetch success fully',

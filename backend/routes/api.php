@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Base\AnswerController;
 use App\Http\Controllers\Base\CategoryController;
 use App\Http\Controllers\Base\DifficultyController;
+use App\Http\Controllers\Base\GlobalController;
 use App\Http\Controllers\Base\QuestionController;
 use App\Http\Controllers\Base\QuizController;
 use Illuminate\Http\Request;
@@ -32,5 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/save-quiz-attempt', [QuizController::class,'quizSave']);
 
     Route:: get('/result-history/{id}',[QuizController::class,'getResultHistory']);
+    
+    Route::post('/global/update-status', [GlobalController::class, 'updateStatus']);
 
 });
