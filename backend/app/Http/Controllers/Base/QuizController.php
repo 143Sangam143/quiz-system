@@ -23,7 +23,7 @@ class QuizController extends Controller
     public function index()
     {
         // $data = Quiz::with('categories','    ','questions','attempts.user')->get();
-        $data = Quiz::get();
+        $data = Quiz::latest()->get();
 
         
         return response()->json([
@@ -130,7 +130,7 @@ class QuizController extends Controller
             $quiz->load('categories','difficulty','questions');
             $categories = Category::active()->get();
             $difficulties = Difficulty::active()->get();
-            $questions = Question::whereIn('category_id', $quiz->category_ids)
+            $questions = Question::whereIn('category_id', $quiz->category_id ?? [])
                                 ->where('difficulty_id', $quiz->difficulty_id)
                                 ->get();
             return response()->json([

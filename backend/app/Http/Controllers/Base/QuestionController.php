@@ -18,7 +18,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $data = Question::with('category','difficulty')->get();
+        $data = Question::with('category','difficulty')->latest()->get();
 
         return response()->json([
             'success' => true,

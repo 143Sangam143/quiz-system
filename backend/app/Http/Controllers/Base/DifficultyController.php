@@ -16,7 +16,7 @@ class DifficultyController extends Controller
      */
     public function index()
     {
-        $data = Difficulty::get();
+        $data = Difficulty::with('questions')->latest()->get();
         return response()->json([
             'success' => true,
             'message' => 'Difficulties fetch success fully',

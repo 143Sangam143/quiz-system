@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\HasModelAttribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
+    use HasModelAttribute;
     protected $fillable = [
         'title','uri','time','is_active','difficulty_id','admin_id'];
 

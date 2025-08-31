@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasModelAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Difficulty extends Model
 {
-    use HasFactory;
+    use HasFactory, HasModelAttribute;
     protected $guard_name = 'admin';
 
     protected $fillable = ['admin_id','name','uri','is_active'];
@@ -20,7 +21,7 @@ class Difficulty extends Model
         return 'uri';
     }
 
-    public function question(){
+    public function questions(){
         return $this->hasMany(Question::class);
     }
 
