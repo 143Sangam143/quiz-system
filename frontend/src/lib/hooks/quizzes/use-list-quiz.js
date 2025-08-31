@@ -12,7 +12,7 @@ export function useListQuiz(){
             const res = await apiService.getQuizzes();
             setQuizzes(res.data);
         }catch (error) {
-            console.error("Error fetching quizzes:", error);
+            toastr.error("Error fetching quizzes:", error);
         } finally {
             setLoading(false);
         }
@@ -41,6 +41,7 @@ export function useListQuiz(){
     return {
         quizzes,
         loading,
+        setQuizzes,
         handleDelete
     }
 }

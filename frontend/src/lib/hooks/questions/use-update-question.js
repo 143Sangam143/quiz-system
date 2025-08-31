@@ -73,14 +73,6 @@ export function useUpdateQuestion(){
         fetchAdditionalData();
     }, [uri]);
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
-
     const handleAnswerTextChange = (index, text) => {
         const newOptions = [...formData.answer_text];
         newOptions[index] = { 
@@ -149,9 +141,9 @@ export function useUpdateQuestion(){
 
     return {
         loading,
+        setFormData,
         formData,
         additionalData,
-        handleChange,
         handleSubmit,
         handleCorrectChange,
         handleAnswerTextChange

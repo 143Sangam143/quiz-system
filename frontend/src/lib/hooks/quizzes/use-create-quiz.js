@@ -81,14 +81,6 @@ export function useCreateQuiz(){
         }
     }, [formData.category_id, formData.difficulty_id]);
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
-
     const handleCategoryChange = (e) => {
         const selected = Array.from(e.target.selectedOptions, option => parseInt(option.value));
         setFormData(prev => ({ 
@@ -150,9 +142,9 @@ export function useCreateQuiz(){
         questions,
         additionalData,
         loading,
+        setFormData,
         handleCategoryChange,
         handleQuestionChange,
-        handleChange,
         handleSubmit
     }
 }

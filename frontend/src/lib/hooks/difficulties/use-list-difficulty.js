@@ -40,6 +40,7 @@ export function useListDifficulty(){
     return {
         difficulties,
         loading,
+        setDifficulties,
         handleDelete
     }
 }

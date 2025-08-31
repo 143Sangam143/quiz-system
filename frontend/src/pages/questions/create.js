@@ -1,9 +1,12 @@
 import { useCreateQuestion } from "../../lib/hooks/questions/use-create-question";
+import { useGlobalHook } from "../../lib/hooks/use-global-hook";
 
 
 export default function QuestionCreate() {
    
-    const { formData, additionalData, loading, handleChange, handleAnswerTextChange, handleCorrectChange, handleSubmit} = useCreateQuestion();
+    const { formData, setFormData, additionalData, loading, handleAnswerTextChange, handleCorrectChange, handleSubmit} = useCreateQuestion();
+
+    const {handleChange} = useGlobalHook({ setData: setFormData });
 
     return (
         <div className="bg-white shadow-lg rounded-lg">

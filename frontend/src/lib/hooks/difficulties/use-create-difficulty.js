@@ -10,13 +10,6 @@ export function useCreateDifficulty(){
     });
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -39,7 +32,7 @@ export function useCreateDifficulty(){
     return {
         formData,
         loading,
-        handleChange,
+        setFormData,
         handleSubmit
     }
 }

@@ -1,9 +1,12 @@
 import { useUpdateQuestion } from "../../lib/hooks/questions/use-update-question";
+import { useGlobalHook } from "../../lib/hooks/use-global-hook";
 
 
 export default function QuestionEdit() {
     
-    const { loading, formData, additionalData, handleChange, handleSubmit, handleCorrectChange, handleAnswerTextChange } = useUpdateQuestion();
+    const { loading, formData, setFormData, additionalData, handleSubmit, handleCorrectChange, handleAnswerTextChange } = useUpdateQuestion();
+
+    const {handleChange} = useGlobalHook({ setData: setFormData });
 
     if (loading && !formData.question_text) {
         return (

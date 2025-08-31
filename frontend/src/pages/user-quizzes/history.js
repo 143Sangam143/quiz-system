@@ -24,7 +24,7 @@ export default function History() {
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">S.N</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quiz</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Started At</th>
@@ -32,9 +32,9 @@ export default function History() {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {results.map((attempt) => (
+                            {results.map((attempt,index) => (
                             <tr key={attempt.id}>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{attempt.id}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{attempt.quiz?.title}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{attempt.score ?? 0}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

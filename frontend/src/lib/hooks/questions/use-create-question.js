@@ -39,14 +39,6 @@ export function useCreateQuestion(){
 
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
-
     const handleAnswerTextChange = (index, text) => {
         const newOptions = [...formData.answer_text];
         newOptions[index] = { 
@@ -85,9 +77,9 @@ export function useCreateQuestion(){
 
     return {
         formData,
+        setFormData,
         additionalData,
         loading,
-        handleChange,
         handleAnswerTextChange,
         handleCorrectChange,
         handleSubmit
