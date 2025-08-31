@@ -1,16 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Header from '../components/Header';
 
 export default function Home() {
     const { user, role, logout } = useAuth();
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
-            <div className="flex flex-row justify-between">
-                <h1 className="text-4xl font-bold text-gray-800 mb-4">
-                    Welcome Player!
+        <>
+        
+        <Header />
+        <div className="min-h-screen  bg-gray-100 py-4 px-20">
+            <div className="flex flex-col space-y-[.8rem]">
+                <h1 className="text-4xl font-bold text-gray-800">
+                    Hot Quiz
                 </h1>
+                <hr />
 
                 <div className="flex space-x-4">
 
@@ -51,5 +56,6 @@ export default function Home() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

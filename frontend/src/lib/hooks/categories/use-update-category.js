@@ -19,13 +19,12 @@ export function useUpdateCategory(){
             const res = await apiService.getCategoryByUri(uri);
             if (res?.success) {
                 setFormData(res.data);
-                toast.success('Category updated successfully!');
             } else {
-                console.warn("Category not found");
-                console.warn(res);
+                toast.error("Category not found");
+                navigate('/categories');
             }
         }catch (error) {
-            console.error("Error fetching categories:", error);
+            toast.error("Error fetching categories:", error);
         } finally {
             setLoading(false);
         }
@@ -34,13 +33,6 @@ export function useUpdateCategory(){
         fetchCategory();
     },[]);
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -50,12 +42,10 @@ export function useUpdateCategory(){
                 toast.success('Category updated successfully!');
                 navigate('/categories');
             } else {
-                console.warn("Category not found");
-                console.warn(res);
+                toast.warn("Category not found");
             }
         } catch (error) {
-            const errorMessage = error.response?.data?.message || error.message || 'Something went wrong';
-            toast.error(errorMessage);
+            toast.error(error || 'Something went wrong');
         } finally {
             setLoading(false);
         }
@@ -65,7 +55,7 @@ export function useUpdateCategory(){
         uri,
         loading,
         formData,
-        handleChange,
+        setFormData,
         handleSubmit
     }
 }

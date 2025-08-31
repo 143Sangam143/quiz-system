@@ -19,13 +19,12 @@ export function useUpdateDifficulyt(){
             const res = await apiService.getDifficultyByUri(uri);
             if (res?.success) {
                 setFormData(res.data);
-                toast.success('difficulty updated successfully!');
             } else {
-                console.warn("difficulty not found");
+                toast.warn("Difficulty not found");
                 console.warn(res);
             }
         }catch (error) {
-            console.error("Error updating difficulties:", error);
+            toast.error("Error updating difficulties:", error);
         } finally {
             setLoading(false);
         }
@@ -34,13 +33,6 @@ export function useUpdateDifficulyt(){
         fetchDifficulty();
     },[]);
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -50,12 +42,10 @@ export function useUpdateDifficulyt(){
                 toast.success('Difficulty updated successfully!');
                 navigate('/difficulties');
             } else {
-                console.warn("Difficulty not found");
-                console.warn(res);
+                toast.warn("Difficulty not update");
             }
         } catch (error) {
-            const errorMessage = error.response?.data?.message || error.message || 'Something went wrong';
-            toast.error(errorMessage);
+            toast.error(error.message || 'Something went wrong');
         } finally {
             setLoading(false);
         }
@@ -64,7 +54,7 @@ export function useUpdateDifficulyt(){
     return {
         formData,
         loading,
-        handleChange,
+        setFormData,
         handleSubmit
     }
 }

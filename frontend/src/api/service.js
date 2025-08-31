@@ -77,6 +77,13 @@ const apiService = {
         }
     },
 
+    /****************************Global Services Starts ************************/
+    async globalToggleStatus(data){
+        const response = await api.post('/global/update-status',data);
+        return response.data;
+    },
+    /****************************Global Services Ends ************************/
+
     /****************************Category Services Starts ************************/
 
     async getCategories() {

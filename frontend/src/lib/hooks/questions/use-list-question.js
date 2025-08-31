@@ -3,14 +3,14 @@ import apiService from "../../../api/service";
 import { toast } from 'react-toastify';
 
 export function useListQuestion(){
-    const [questions, setQuestion] = useState([]);
+    const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState();
 
     const fetchQuestions = async() => {
         try{
             setLoading(true);
             const res = await apiService.getQuestions();
-            setQuestion(res.data);
+            setQuestions(res.data);
         }catch (error) {
             console.error("Error fetching questions:", error);
         } finally {
@@ -41,6 +41,7 @@ export function useListQuestion(){
     return {
         questions,
         loading,
+        setQuestions,
         handleDelete
     }
 }

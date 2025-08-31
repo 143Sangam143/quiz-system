@@ -12,7 +12,7 @@ export function useListCategory(){
             const res = await apiService.getCategories();
             setCategories(res.data);
         }catch (error) {
-            console.error("Error fetching categories:", error);
+            toast.error("Error fetching categories:", error);
         } finally {
             setLoading(false);
         }
@@ -29,10 +29,10 @@ export function useListCategory(){
                 toast.success('Category deleted successfully!');
                 fetchCategories();
             }else{
-                console.warn('Category not delete');
+                toast.warn('Category not delete');
             }
         }catch (error) {
-            console.error("Error fetching categories:", error);
+            toast.error("Error fetching categories:", error);
         } finally {
             setLoading(false);
         }
@@ -40,6 +40,7 @@ export function useListCategory(){
 
     return {
         categories,
+        setCategories,
         loading,
         handleDelete
     }

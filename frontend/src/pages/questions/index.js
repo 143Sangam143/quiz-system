@@ -1,25 +1,14 @@
 import { Link } from "react-router-dom";
 import { useListQuestion } from "../../lib/hooks/questions/use-list-question";
+import { useGlobalHook } from "../../lib/hooks/use-global-hook";
 
 export default function QuestionIndex() {
   
-  const { questions, loading, handleDelete } = useListQuestion();
+  const { questions, loading, setQuestions, handleDelete } = useListQuestion();
+  const {handleToggleActive} = useGlobalHook({setLists:setQuestions});
 
   return (
-    <div className="bg-white shadow rounded-lg p-6">
-      <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900">
-              {'Question List'}
-          </h3>
-      </div>
-      <div>
-        <Link
-          to="/questions/create"
-          className="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-        >
-          Add
-        </Link>
-      </div>
+    <div className="bg-white shadow rounded-lg">
       {loading ? (
         <p className="text-gray-600">Loading data...</p>
       ) 
@@ -36,7 +25,7 @@ export default function QuestionIndex() {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  ID
+                  S.N
                 </th>
                 <th
                   scope="col"
@@ -62,42 +51,49 @@ export default function QuestionIndex() {
                 >
                   Active
                 </th>
-                <th scope="col" className="relative px-6 py-3">
-                  <span className="sr-only">Edit</span>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Action
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {questions.map((item) => (
+              {questions.map((item, index) => (
                 <tr key={item.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {item.id}
+                    {index + 1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {item.question_text}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.answer_explanation	}
+                    <div className="w-[20rem] overflow-hidden ellipse text-ellipsis">
+                      {item.answer_explanation	}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     <Link to={`/answers/${item.uri}`}>Answers</Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <input type="checkbox" name="is_active" checked={item.is_active} />
+                    <input type="checkbox" name="is_active" checked={item.is_active} onChange={(e) => handleToggleActive(item.id, e.target.name, e.target.checked,item.model)} />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Link
-                      to={`/questions/edit/${item.uri}`}
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => handleDelete(item)}
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Delete
-                    </button>
+                    <div className="flex flex-wrap place-content-end gap-[10px]">
+                      <button
+                        className="bg-blue-500 text-white hover:bg-blue-600 transition font-medium rounded-lg text-xs px-4 py-2"
+                      >
+                        <Link
+                          to={`/questions/edit/${item.uri}`}
+                        >
+                          Edit
+                        </Link>
+                      </button>
+                       <button
+                        onClick={() => handleDelete(item)}
+                        className="bg-red-500 text-white hover:bg-red-600 transition font-medium rounded-lg text-xs px-4 py-2"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

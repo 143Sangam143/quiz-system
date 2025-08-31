@@ -10,13 +10,6 @@ export function useCreateCategory(){
         is_active: true
     });
     const [loading, setLoading] = useState(false);
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -26,11 +19,10 @@ export function useCreateCategory(){
                 navigate('/categories');
                 toast.success('Category created successfully!');
             }else{
-                console.warn('Category not created');
+                toast.warn('Category not created');
             }
         } catch (error) {
-            const errorMessage = error.response?.data?.message || error.message || 'Something went wrong';
-            toast.error(errorMessage);
+            toast.error(error.message || 'Something went wrong');
         } finally {
             setLoading(false);
         }
@@ -39,8 +31,8 @@ export function useCreateCategory(){
 
     return {
         formData,
+        setFormData,
         loading,
-        handleChange,
         handleSubmit
     }
 }

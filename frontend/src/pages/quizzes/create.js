@@ -1,9 +1,11 @@
 import { useCreateQuiz } from "../../lib/hooks/quizzes/use-create-quiz";
+import { useGlobalHook } from "../../lib/hooks/use-global-hook";
 
 
 export default function QuizCreate() {
     
-    const { formData, questions, additionalData, loading, handleCategoryChange, handleQuestionChange, handleChange, handleSubmit } = useCreateQuiz();
+    const { formData, setFormData, questions, additionalData, loading, handleCategoryChange, handleQuestionChange, handleSubmit } = useCreateQuiz();
+    const {handleChange} = useGlobalHook({ setData: setFormData });
 
     return (
         <div className="bg-white shadow-lg rounded-lg">
