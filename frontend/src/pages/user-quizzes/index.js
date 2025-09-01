@@ -6,12 +6,7 @@ export default function QuizListUser() {
   const { quizzes, loading } = useQuizList();
 
   return (
-    <div className="bg-white shadow rounded-lg p-6">
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900">
-          {'Quiz List'}
-        </h3>
-      </div>
+    <div className="bg-white shadow rounded-lg">
       {loading ? (
         <p className="text-gray-600">Loading data...</p>
       ) 

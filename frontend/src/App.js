@@ -80,7 +80,7 @@ function App() {
               } />
               <Route path="/history/:id" element={
                 <PrivateRoute allowedRoles={['user']}>
-                  <Layout>
+                  <Layout pageTitle='Result History'>
                     <History />
                   </Layout>
                 </PrivateRoute>

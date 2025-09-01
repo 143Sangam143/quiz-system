@@ -6,17 +6,16 @@ export default function History() {
     const {results, loading} = usePlayerHistory();
 
     return (
-        <div className="bg-white shadow rounded-lg p-6">
-            <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">
-                    {'Result History'}
-                </h3>
-            </div>
+        <div className="bg-white shadow rounded-lg">
             {loading ? (
-                <p className="text-gray-600">Loading data...</p>
+                <div className="p-6">
+                    <p className="text-gray-600">Loading data...</p>
+                </div>
             ) 
             : results.length === 0 ? (
-                <p className="text-gray-600">No data found.</p>
+                <div className="p-6">
+                    <p className="text-gray-600">No data found.</p>
+                </div>
             ) 
             : 
             (
